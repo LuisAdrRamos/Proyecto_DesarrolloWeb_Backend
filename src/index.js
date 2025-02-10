@@ -1,15 +1,11 @@
+import app from "./server.js";
+import connection from "./database.js";
 
-import app from './server.js'
+const port = process.env.PORT || 3000;
 
-
-// Importar la función connection()
-import connection from './database.js';
-
-// Haicneod uso de la función connection()
-connection()
-
-
-app.listen(app.get('port'),()=>{
-    console.log(`Server ok on http://localhost:${app.get('port')}`);
-})
-
+// Conectar a la base de datos antes de iniciar el servidor
+connection().then(() => {
+  app.listen(port, () => {
+    console.log(`✅ Servidor corriendo en http://localhost:${port}`);
+  });
+});
